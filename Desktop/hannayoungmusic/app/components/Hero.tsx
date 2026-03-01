@@ -53,7 +53,7 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white section-padding">
         <h1 className="font-[family-name:var(--font-playfair)] text-5xl md:text-7xl lg:text-8xl font-medium tracking-wide mb-6 animate-fade-in">
-          Hanna Young
+          Hanna Young Music
         </h1>
         <p className="font-[family-name:var(--font-cormorant)] text-2xl md:text-3xl font-light tracking-widest mb-12 animate-fade-in">
           Classical Saxophonist
