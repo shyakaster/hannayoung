@@ -86,12 +86,11 @@ export function Hero() {
 
         {/* Main Title */}
         <h1 
-          className={`font-[family-name:var(--font-playfair)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-normal tracking-tight mb-4 transition-all duration-1000 delay-500 ${
+          className={`font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal tracking-tight mb-4 transition-all duration-1000 delay-500 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="block">Hanna</span>
-          <span className="block font-light italic text-[#e8e4dc]">Young</span>
+          <span className="whitespace-nowrap">Hanna Young <span className="font-light italic text-[#e8e4dc]">Music</span></span>
         </h1>
 
         {/* Subtitle */}
