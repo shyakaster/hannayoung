@@ -16,8 +16,8 @@ const galleryImages = [
     alt: "Classical performance",
   },
   {
-    src: "https://images.unsplash.com/photo-1465847899078-b413929f7120?w=800&h=1000&fit=crop",
-    alt: "Wedding performance",
+    src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&h=1000&fit=crop",
+    alt: "Concert performance",
   },
   {
     src: "https://images.unsplash.com/photo-1485579149621-3123dd979885?w=800&h=600&fit=crop",
