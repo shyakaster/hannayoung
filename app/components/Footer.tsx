@@ -52,31 +52,53 @@ const navLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-neutral-900 text-white py-16">
-      <div className="section-padding">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
-          {/* Logo & Description */}
-          <div>
+    <footer className="bg-[#1c1917] text-white relative">
+      {/* Decorative top border */}
+      <div className="h-1 bg-gradient-to-r from-[#8b7355] via-[#a6917b] to-[#8b7355]" />
+      
+      <div className="section-padding py-20 md:py-24">
+        {/* Main footer content - minimal grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
+          {/* Logo and tagline */}
+          <div className="lg:col-span-5">
             <Link 
               href="#home" 
-              className="font-[family-name:var(--font-playfair)] text-3xl font-medium tracking-wide block mb-4"
+              className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl font-normal tracking-wide block mb-6"
             >
               Hanna Young
             </Link>
-            <p className="font-[family-name:var(--font-cormorant)] text-lg text-neutral-400">
-              Classical Saxophonist based in London, available for weddings, events, and performances.
+            <p className="font-[family-name:var(--font-cormorant)] text-lg text-white/60 leading-relaxed max-w-sm mb-8">
+              Classical Saxophonist bringing elegance and emotion to weddings, events, and concerts across London and the UK.
             </p>
+            
+            {/* Social links - minimal */}
+            <div className="flex gap-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all duration-300"
+                  aria-label={social.name}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <h3 className="font-[family-name:var(--font-playfair)] text-xl font-medium mb-6">Navigation</h3>
+          {/* Navigation - compact */}
+          <div className="lg:col-span-3 lg:col-start-7">
+            <h3 className="font-[family-name:var(--font-cormorant)] text-xs tracking-[0.3em] uppercase text-[#8b7355] mb-6">
+              Navigation
+            </h3>
             <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="font-[family-name:var(--font-cormorant)] text-lg text-neutral-400 hover:text-white transition-colors"
+                    className="font-[family-name:var(--font-cormorant)] text-lg text-white/60 hover:text-white transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -85,41 +107,51 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Social Links */}
-          <div>
-            <h3 className="font-[family-name:var(--font-playfair)] text-xl font-medium mb-6">Connect</h3>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-neutral-600 flex items-center justify-center text-neutral-400 hover:text-white hover:border-white transition-colors"
-                  aria-label={social.name}
-                >
-                  {social.icon}
+          {/* Contact info */}
+          <div className="lg:col-span-3">
+            <h3 className="font-[family-name:var(--font-cormorant)] text-xs tracking-[0.3em] uppercase text-[#8b7355] mb-6">
+              Contact
+            </h3>
+            <div className="space-y-4 font-[family-name:var(--font-cormorant)] text-lg text-white/60">
+              <p>
+                <a href="mailto:hello@hannayoungmusic.com" className="hover:text-white transition-colors">
+                  hello@hannayoungmusic.com
                 </a>
-              ))}
+              </p>
+              <p>London, UK</p>
+              <p className="text-sm">Available for events across the UK and Europe</p>
             </div>
-            <p className="mt-6 font-[family-name:var(--font-cormorant)] text-lg text-neutral-400">
-              hello@hannayoungmusic.com
-            </p>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="font-[family-name:var(--font-cormorant)] text-neutral-500">
+        {/* Bottom bar - minimal */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-[family-name:var(--font-cormorant)] text-sm text-white/40">
             © 2026 Hanna Elizabeth Young. All rights reserved.
           </p>
-          <Link
-            href="#"
-            className="font-[family-name:var(--font-cormorant)] text-neutral-500 hover:text-white transition-colors"
-          >
-            Privacy Policy
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link
+              href="#"
+              className="font-[family-name:var(--font-cormorant)] text-sm text-white/40 hover:text-white transition-colors"
+            >
+              Privacy
+            </Link>
+            <span className="text-white/20">·</span>
+            <Link
+              href="#"
+              className="font-[family-name:var(--font-cormorant)] text-sm text-white/40 hover:text-white transition-colors"
+            >
+              Terms
+            </Link>
+          </div>
         </div>
+      </div>
+
+      {/* Large decorative text */}
+      <div className="section-padding pb-8 overflow-hidden">
+        <p className="font-[family-name:var(--font-playfair)] text-[8vw] md:text-[6vw] lg:text-[4vw] font-normal text-white/[0.03] leading-none tracking-tight select-none">
+          Hanna Young Music
+        </p>
       </div>
     </footer>
   );
