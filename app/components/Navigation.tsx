@@ -28,9 +28,12 @@ export function Navigation() {
   }, [open]);
 
   return (
+    <>
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open
+        open
+          ? "bg-transparent text-[var(--paper)]"
+          : scrolled
           ? "bg-[var(--paper)]/90 backdrop-blur-md border-b border-[var(--line)]"
           : "bg-transparent"
       }`}
@@ -90,10 +93,12 @@ export function Navigation() {
           />
         </button>
       </nav>
+      </header>
 
-      {/* Mobile overlay */}
+      {/* Mobile overlay — sibling of <header> so the header's backdrop-blur
+          can't contain this fixed element and collapse it into the bar */}
       <div
-        className={`md:hidden fixed inset-0 bg-[var(--ink)] text-[var(--paper)] transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 z-40 bg-[var(--ink)] text-[var(--paper)] transition-all duration-500 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -124,6 +129,6 @@ export function Navigation() {
           </a>
         </div>
       </div>
-    </header>
+    </>
   );
 }
