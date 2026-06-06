@@ -83,6 +83,35 @@ ones Vercel provides (Vercel → Domains will list them). Vercel then manages al
 DNS. Trade-off: any email/other records for the domain must then also be managed
 in Vercel.
 
+## Troubleshooting — "I pushed to GitHub but the live site didn't change"
+
+The push is fine if `git log origin/main -1` shows your latest commit (it does).
+The issue is then on Vercel. Check, in order:
+
+1. **Vercel → project → Deployments.** Did a new deployment start when you pushed?
+   - **No new deployment** → Git integration isn't connected (most likely cause
+     here — there's no `.vercel` folder and the project was set up by manual sync).
+     Fix: **Settings → Git → Connect Git Repository → `shyakaster/hannayoung`**, and
+     set **Production Branch = `main`**.
+   - **Deployment failed** → open it and read the build logs; fix the error.
+   - **Deployment succeeded but site looks unchanged** → see steps 2–4.
+2. **Settings → Git → Production Branch** must be `main` (pushes to other branches
+   only create previews, never update the live URL).
+3. **Settings → Build & Deployment → Root Directory** must be empty / `.` — this
+   Next.js app lives at the repo root. (Earlier commits mention "syncing to repo
+   root," which hints this may be pointed at a stale subfolder.)
+4. **Hard-refresh** the live URL (Cmd+Shift+R) to rule out browser cache.
+
+### Fastest fix from this machine (CLI)
+If the dashboard Git link is the problem, you can also deploy directly:
+```bash
+! vercel login            # run in this terminal (interactive) — type your email
+```
+Once logged in, I can run `vercel link` (point it at the existing
+`hanna-young-music` project) and `vercel --prod` to push the current code live.
+Linking the existing project is important — otherwise the CLI creates a *new*
+project at a different URL.
+
 ## Notes
 - `images.unoptimized: true` is set in `next.config.ts`, so local photos in
   `public/` deploy as-is with no extra config.
