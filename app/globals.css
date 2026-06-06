@@ -12,6 +12,7 @@
   --color-paper: #f4f1ea;
   --color-ink: #0c0c0d;
   --color-red: #c0202e;
+  --color-blue: #244bd6;
 }
 
 :root {
@@ -20,6 +21,9 @@
   --ink-soft: #1a1a1c;
   --red: #c0202e;     /* editorial crimson */
   --red-deep: #97131f;
+  --blue: #244bd6;        /* secondary accent — her favourite colour */
+  --blue-deep: #1a37a6;
+  --blue-light: #8fa9ff;  /* for use on dark (ink) sections */
   --muted: #6f6b62;
   --muted-light: #a8a399;
   --line: rgba(12, 12, 13, 0.14);
@@ -170,8 +174,9 @@ h1, h2, h3, h4 {
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.2em;
-  color: var(--muted);
+  color: var(--blue);
 }
+.on-ink .index-num { color: var(--blue-light); }
 
 /* ---------- Scroll reveal ---------- */
 .reveal {

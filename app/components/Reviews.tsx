@@ -21,7 +21,7 @@ export function Reviews() {
       <div className="container-wide">
         <Reveal>
           <div className="flex items-baseline gap-4">
-            <span className="index-num !text-[var(--muted-light)]">(03)</span>
+            <span className="index-num">(03)</span>
             <span className="eyebrow">Praise &amp; Awards</span>
           </div>
         </Reveal>

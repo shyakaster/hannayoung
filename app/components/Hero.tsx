@@ -65,7 +65,7 @@ export function Hero() {
         <div className="relative">
           {/* Offset accent block */}
           <div className="absolute -top-4 -right-4 lg:-right-8 w-2/3 h-3/4 bg-[var(--red)] z-0 hidden sm:block" />
-          <div className="absolute -bottom-5 -left-5 w-24 h-24 border border-[var(--ink)] z-0 hidden sm:block" />
+          <div className="absolute -bottom-5 -left-5 w-24 h-24 border-2 border-[var(--blue)] z-0 hidden sm:block" />
 
           <div className="img-frame relative z-10 aspect-[3/4] w-full max-w-[460px] mx-auto bg-[var(--ink)]">
             {/* Save the black-dress portrait as /public/hanna-1.jpg */}

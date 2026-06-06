@@ -17,7 +17,7 @@ export function Marquee() {
           <span className="font-[family-name:var(--font-instrument)] text-3xl md:text-5xl">
             {w}
           </span>
-          <span className="text-[var(--red)] text-2xl">✦</span>
+          <span className="text-[var(--blue-light)] text-2xl">✦</span>
         </span>
       ))}
     </div>

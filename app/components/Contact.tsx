@@ -9,7 +9,7 @@ export function Contact() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <Reveal>
             <div className="flex items-baseline gap-4">
-              <span className="index-num !text-[var(--muted-light)]">(05)</span>
+              <span className="index-num">(05)</span>
               <span className="eyebrow">Booking</span>
             </div>
             <h2 className="display text-[clamp(2.6rem,7vw,6rem)] mt-6">
