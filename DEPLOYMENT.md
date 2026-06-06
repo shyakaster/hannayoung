@@ -40,6 +40,16 @@ vercel --prod          # deploy to production
 
 ## B. Point your Namecheap domain at Vercel
 
+> **Actual setup (as of June 2026):** the domain is **hannayoungmusic.com**
+> (apex = primary, `www` redirects to it). Both are already added to the Vercel
+> project via CLI. **Gotcha:** the domain is registered at Namecheap but its
+> nameservers point to **Wix** (`ns4/ns5.wixdns.net`), so DNS must be taken back
+> by changing nameservers at Namecheap — either to Vercel
+> (`ns1.vercel-dns.com`, `ns2.vercel-dns.com`, simplest) or to Namecheap BasicDNS
+> and then adding `A @ 76.76.21.21` + `CNAME www cname.vercel-dns.com`. Switching
+> nameservers disconnects any Wix site/email on that domain.
+
+
 Use your real domain (e.g. `hannayoungmusic.com`). Two parts: tell Vercel about the
 domain, then update DNS at Namecheap.
 
