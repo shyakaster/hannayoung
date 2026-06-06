@@ -17,7 +17,7 @@ export function Gallery() {
           <Reveal>
             <div className="img-frame relative aspect-[4/5] bg-[var(--ink)]">
               <Image
-                src="/hanna-1.jpg"
+                src="/hanna-2.jpg"
                 alt="Hanna Elizabeth Young — portrait"
                 fill
                 sizes="(max-width: 768px) 90vw, 45vw"
@@ -33,11 +33,11 @@ export function Gallery() {
           <Reveal delay={120} className="md:mt-20">
             <div className="img-frame relative aspect-[5/4] bg-[var(--ink)]">
               <Image
-                src="/hanna-2.jpg"
-                alt="Hanna Elizabeth Young — performing"
+                src="/hanna-1.jpg"
+                alt="Hanna Elizabeth Young — on location"
                 fill
                 sizes="(max-width: 768px) 90vw, 45vw"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
             <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">

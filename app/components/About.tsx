@@ -17,14 +17,14 @@ export function About() {
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-20 mt-10 items-start">
           {/* Portrait */}
           <Reveal className="order-2 lg:order-1">
-            <div className="img-frame relative aspect-[4/5] bg-[var(--ink)]">
-              {/* Save the second photo (clean / un-watermarked) as /public/hanna-2.jpg */}
+            <div className="img-frame relative aspect-[4/3] bg-[var(--ink)]">
+              {/* Landscape (on location) lives at /public/hanna-1.jpg */}
               <Image
-                src="/hanna-2.jpg"
-                alt="Hanna Elizabeth Young performing"
+                src="/hanna-1.jpg"
+                alt="Hanna Elizabeth Young"
                 fill
                 sizes="(max-width: 1024px) 90vw, 480px"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
             <div className="flex flex-wrap gap-2 mt-5">

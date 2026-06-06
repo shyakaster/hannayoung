@@ -19,7 +19,7 @@ export function Hero() {
             London Vocalist
           </p>
 
-          <h1 className="display mt-6 text-[clamp(3.4rem,9vw,8.5rem)]">
+          <h1 className="display mt-6 text-[clamp(2.85rem,9vw,8.5rem)]">
             Hanna
             <br />
             Elizabeth
@@ -68,9 +68,9 @@ export function Hero() {
           <div className="absolute -bottom-5 -left-5 w-24 h-24 border-2 border-[var(--blue)] z-0 hidden sm:block" />
 
           <div className="img-frame relative z-10 aspect-[3/4] w-full max-w-[460px] mx-auto bg-[var(--ink)]">
-            {/* Save the black-dress portrait as /public/hanna-1.jpg */}
+            {/* Portrait (black dress) lives at /public/hanna-2.jpg */}
             <Image
-              src="/hanna-1.jpg"
+              src="/hanna-2.jpg"
               alt="Hanna Elizabeth Young, vocalist"
               fill
               priority

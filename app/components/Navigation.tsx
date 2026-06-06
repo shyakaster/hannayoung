@@ -97,7 +97,7 @@ export function Navigation() {
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col justify-center h-full container-wide gap-2">
+        <div className="flex flex-col justify-center min-h-full container-wide gap-2 py-24 overflow-y-auto">
           {navItems.map((item, i) => (
             <a
               key={item.href}
