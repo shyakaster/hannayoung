@@ -1,109 +1,129 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { whatsapp } from "../lib/site";
+import { WhatsAppIcon } from "./icons";
 
 const navItems = [
-  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Events", href: "#events" },
-  { label: "News", href: "#news" },
+  { label: "Packages", href: "#packages" },
+  { label: "Praise", href: "#praise" },
   { label: "Gallery", href: "#gallery" },
   { label: "Contact", href: "#contact" },
 ];
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+  }, [open]);
+
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? "bg-white/90 backdrop-blur-md shadow-sm" 
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled || open
+          ? "bg-[var(--paper)]/90 backdrop-blur-md border-b border-[var(--line)]"
           : "bg-transparent"
       }`}
     >
-      <div className="section-padding">
-        <div className={`flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? "h-16" : "h-20"
-        }`}>
-          {/* Logo */}
-          <Link 
-            href="#home" 
-            className={`font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-normal tracking-wide transition-all duration-300 ${
-              isScrolled ? "text-[#1c1917]" : "text-white"
-            } hover:opacity-70`}
-          >
+      <nav className="container-wide flex items-center justify-between h-[72px]">
+        <a
+          href="#home"
+          className="flex items-baseline gap-2 group"
+          onClick={() => setOpen(false)}
+        >
+          <span className="font-[family-name:var(--font-instrument)] text-2xl tracking-tight leading-none">
             Hanna Young
-          </Link>
+          </span>
+          <span className="hidden sm:inline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-[var(--muted)] pb-0.5">
+            Vocalist
+          </span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-12">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`font-[family-name:var(--font-cormorant)] text-base font-medium tracking-widest uppercase transition-all duration-300 link-underline ${
-                  isScrolled ? "text-[#1c1917]" : "text-white"
-                } hover:opacity-70`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded transition-colors ${
-              isScrolled ? "hover:bg-[#e8e4dc]" : "hover:bg-white/10"
-            }`}
-            aria-label="Toggle navigation"
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-9">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="link-underline text-[0.78rem] font-medium uppercase tracking-[0.16em]"
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href={whatsapp("Hi Hanna, I'd love to enquire about booking you for an event.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ink !py-3 !px-5 text-[0.72rem]"
           >
-            <div className="w-6 h-5 relative flex flex-col justify-between">
-              <span className={`block h-px transition-all duration-300 ${
-                isScrolled ? "bg-[#1c1917]" : "bg-white"
-              } ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-              <span className={`block h-px transition-all duration-300 ${
-                isScrolled ? "bg-[#1c1917]" : "bg-white"
-              } ${isOpen ? 'opacity-0' : ''}`} />
-              <span className={`block h-px transition-all duration-300 ${
-                isScrolled ? "bg-[#1c1917]" : "bg-white"
-              } ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-            </div>
-          </button>
+            <WhatsAppIcon className="shrink-0" />
+            Book now
+          </a>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg border-t border-[#e8e4dc]">
-            <div className="section-padding py-8">
-              <div className="flex flex-col space-y-6">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#1c1917] hover:text-[#8b7355] transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden relative z-50 flex flex-col gap-[5px] p-2 -mr-2"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          <span
+            className={`block w-6 h-px bg-current transition-transform duration-300 ${
+              open ? "translate-y-[6px] rotate-45" : ""
+            }`}
+          />
+          <span className={`block w-6 h-px bg-current transition-opacity duration-300 ${open ? "opacity-0" : ""}`} />
+          <span
+            className={`block w-6 h-px bg-current transition-transform duration-300 ${
+              open ? "-translate-y-[6px] -rotate-45" : ""
+            }`}
+          />
+        </button>
+      </nav>
+
+      {/* Mobile overlay */}
+      <div
+        className={`md:hidden fixed inset-0 bg-[var(--ink)] text-[var(--paper)] transition-all duration-500 ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col justify-center h-full container-wide gap-2">
+          {navItems.map((item, i) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="flex items-baseline gap-4 py-3 border-b border-[var(--line-light)]"
+            >
+              <span className="text-[0.65rem] font-semibold text-[var(--red)] tracking-widest">
+                0{i + 1}
+              </span>
+              <span className="font-[family-name:var(--font-instrument)] text-5xl">
+                {item.label}
+              </span>
+            </a>
+          ))}
+          <a
+            href={whatsapp("Hi Hanna, I'd love to enquire about booking you for an event.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="btn btn-red mt-8 self-start"
+          >
+            <WhatsAppIcon /> Book via WhatsApp
+          </a>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }

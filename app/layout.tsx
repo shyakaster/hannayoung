@@ -1,39 +1,47 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Instrument_Serif, Archivo } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
+import { FloatingBook } from "./components/FloatingBook";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const display = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const body = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Hanna Young | Classical Saxophonist",
-  description: "Hanna Elizabeth Young - Professional classical saxophonist based in London, available for weddings, events, and performances.",
+  title: "Hanna Elizabeth Young | London Vocalist — Weddings & Events",
+  description:
+    "London-based vocalist for weddings, private events and venues. Jazz, soul, folk, blues and classical crossover. Trained in New York. Available worldwide — book via WhatsApp.",
+  openGraph: {
+    title: "Hanna Elizabeth Young | London Vocalist",
+    description:
+      "Elegant, soulful live vocals for weddings, private events and venues. Available worldwide.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body
-        className={`${playfair.variable} ${cormorant.variable} antialiased bg-white text-neutral-900`}
-      >
+      <body className={`${display.variable} ${body.variable} antialiased`}>
         <Navigation />
         {children}
         <Footer />
+        <FloatingBook />
       </body>
     </html>
   );

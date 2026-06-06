@@ -1,0 +1,90 @@
+# Deployment — Vercel + Namecheap domain
+
+The site is already live at **https://hanna-young-music.vercel.app**.
+
+## A. Deploy changes to Vercel
+
+### Option 1 — Git push (recommended, automatic)
+If the Vercel project is connected to this Git repo (it almost certainly is, given
+the existing URL), deployment is automatic:
+
+```bash
+git add -A
+git commit -m "Redesign site"
+git push origin main
+```
+
+- Pushing to **main** → Vercel builds and deploys to **production** (the live URL).
+- Opening a PR / pushing any other branch → Vercel creates a **Preview**
+  deployment with its own URL, so you can review before merging.
+
+Watch the build at https://vercel.com/dashboard → the project → **Deployments**.
+
+> ⚠️ Before the first deploy of this redesign, replace the placeholder images:
+> save the two real photos as `public/hanna-1.jpg` (portrait) and
+> `public/hanna-2.jpg` (landscape), then commit them.
+
+### Option 2 — Vercel CLI (deploy from your machine)
+```bash
+npm i -g vercel        # once
+vercel login           # once
+vercel                 # deploy a preview
+vercel --prod          # deploy to production
+```
+
+### If the repo is NOT yet linked to Vercel
+1. Push this repo to GitHub.
+2. https://vercel.com/new → Import the repo.
+3. Framework preset: **Next.js** (auto-detected). No build settings to change.
+4. Deploy.
+
+## B. Point your Namecheap domain at Vercel
+
+Use your real domain (e.g. `hannayoungmusic.com`). Two parts: tell Vercel about the
+domain, then update DNS at Namecheap.
+
+### Step 1 — Add the domain in Vercel
+1. Vercel → your project → **Settings → Domains**.
+2. Enter your domain (e.g. `hannayoungmusic.com`) → **Add**.
+3. Add the `www` version too (`www.hannayoungmusic.com`) and let Vercel set one to
+   redirect to the other (apex → www, or www → apex; either is fine).
+4. Vercel now shows the exact DNS records to create. **Use the values Vercel shows
+   you** — the ones below are the current Vercel defaults but always defer to the
+   dashboard.
+
+### Step 2 — Set DNS at Namecheap
+1. Namecheap → **Domain List** → **Manage** next to the domain → **Advanced DNS**.
+2. Delete the default Namecheap "parking" records (the CNAME `www → parkingpage`
+   and any `URL Redirect`/A records for `@`) so they don't conflict.
+3. Add the records Vercel asked for. Typically:
+
+   | Type  | Host | Value                  | TTL       |
+   |-------|------|------------------------|-----------|
+   | A     | `@`  | `76.76.21.21`          | Automatic |
+   | CNAME | `www`| `cname.vercel-dns.com` | Automatic |
+
+   - **A record** points the apex/root domain (`@`) to Vercel.
+   - **CNAME** points `www` to Vercel.
+   - In Namecheap, `@` = the root domain; don't type the domain name in "Host".
+4. Make sure Namecheap's **Nameservers** (Domain tab) are set to **Namecheap
+   BasicDNS** — otherwise the Advanced DNS records are ignored. (Only skip this if
+   you deliberately moved nameservers to Vercel; then add the records in Vercel's
+   DNS instead.)
+
+### Step 3 — Wait & verify
+- DNS usually propagates in minutes, sometimes up to a few hours.
+- Vercel's **Settings → Domains** shows each domain as **Valid** with HTTPS once
+  it detects the records and auto-issues a free SSL certificate.
+- Test: visit `https://hannayoungmusic.com` and `https://www.hannayoungmusic.com`.
+
+### Alternative — let Vercel run DNS (optional, simpler ongoing)
+Instead of editing records, point Namecheap's **Custom DNS** nameservers to the
+ones Vercel provides (Vercel → Domains will list them). Vercel then manages all
+DNS. Trade-off: any email/other records for the domain must then also be managed
+in Vercel.
+
+## Notes
+- `images.unoptimized: true` is set in `next.config.ts`, so local photos in
+  `public/` deploy as-is with no extra config.
+- No environment variables are needed for the current site. (Stripe will add some
+  later — see `STRIPE_PLAN.md`.)
