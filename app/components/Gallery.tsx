@@ -55,7 +55,16 @@ export function Gallery() {
                 Raindance Film Festival 2026
               </h3>
               <p className="lead mt-4 text-[var(--muted)]">
-                With BBC-accredited composer Imran Ahmad, celebrating{" "}
+                With BBC-accredited composer{" "}
+                <a
+                  href="https://imranahmadmusic.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline text-[var(--ink)]"
+                >
+                  Imran Ahmad
+                </a>
+                , celebrating{" "}
                 <em className="not-italic text-[var(--ink)]">Angel of the North</em>{" "}
                 — directed by Sean Cronin.
               </p>
