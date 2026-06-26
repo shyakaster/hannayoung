@@ -5,8 +5,11 @@ The site is already live at **https://hanna-young-music.vercel.app**.
 ## A. Deploy changes to Vercel
 
 ### Option 1 — Git push (recommended, automatic)
-If the Vercel project is connected to this Git repo (it almost certainly is, given
-the existing URL), deployment is automatic:
+✅ **Verified working (June 2026).** The Vercel project's GitHub integration is
+connected to `shyakaster/hannayoung`, so deployment is automatic — a push to `main`
+produces a production deployment aliased to `hannayoungmusic.com` (confirmed by the
+`hanna-young-music-git-main-…` alias Vercel attaches only to Git-triggered builds),
+and a push to any other branch produces a preview:
 
 ```bash
 git add -A
@@ -95,14 +98,19 @@ in Vercel.
 
 ## Troubleshooting — "I pushed to GitHub but the live site didn't change"
 
+> **Note (June 2026):** Git auto-deploy is confirmed connected and working, so the
+> "Git integration isn't connected" branch below is unlikely. If a push doesn't go
+> live, the cause is almost always **browser cache** (step 4) or a **failed build**
+> (step 1) — not a missing integration. You can verify a deploy fired from this
+> machine with `vercel ls hanna-young-music` (the CLI is logged in).
+
 The push is fine if `git log origin/main -1` shows your latest commit (it does).
 The issue is then on Vercel. Check, in order:
 
 1. **Vercel → project → Deployments.** Did a new deployment start when you pushed?
-   - **No new deployment** → Git integration isn't connected (most likely cause
-     here — there's no `.vercel` folder and the project was set up by manual sync).
-     Fix: **Settings → Git → Connect Git Repository → `shyakaster/hannayoung`**, and
-     set **Production Branch = `main`**.
+   - **No new deployment** → Git integration got disconnected. Re-link via
+     **Settings → Git → Connect Git Repository → `shyakaster/hannayoung`**, and
+     set **Production Branch = `main`**. (This is normally already configured.)
    - **Deployment failed** → open it and read the build logs; fix the error.
    - **Deployment succeeded but site looks unchanged** → see steps 2–4.
 2. **Settings → Git → Production Branch** must be `main` (pushes to other branches
